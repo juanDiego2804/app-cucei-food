@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.cuceifood.ui.home.HomeFragment"
+        android:name="com.example.cuceifood.ui.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="com.example.cuceifood.ui.favorites.FavoritesFragment"
+        android:name="com.example.cuceifood.ui.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.cuceifood.ui.profile.ProfileFragment"
+        android:name="com.example.cuceifood.ui.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
