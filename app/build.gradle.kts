@@ -14,6 +14,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -31,6 +32,8 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig=true
+
     }
 }
 
@@ -46,4 +49,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.google.code.gson:gson:2.10.1")//Para parsear la respuesta JSON a objetos Java:
+    implementation("com.backendless:backendless:6.3.0")
+
+
 }
