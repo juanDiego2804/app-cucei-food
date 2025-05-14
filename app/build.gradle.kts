@@ -53,4 +53,16 @@ dependencies {
     implementation("com.backendless:backendless:6.3.0")
 
 
+
+
+// Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+
+
+
+
+// Opcional para manejar tokens JWT
+    implementation("com.auth0.android:jwtdecode:2.0.2")
+
 }

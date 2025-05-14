@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
-    <!-- Barra de búsqueda (ahora solo en Home) -->
+
+    <!-- Barra de búsqueda -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,5 +32,11 @@
         android:text="Filtros"
         android:layout_marginTop="8dp"/>
 
-    <!-- Aquí irá tu RecyclerView con resultados -->
+    <!-- RecyclerView para mostrar resultados -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewLocales"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:clipToPadding="false"/>
 </LinearLayout>

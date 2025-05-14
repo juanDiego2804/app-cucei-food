@@ -41,11 +41,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        // Botón de filtros
-        Button filterButton = findViewById(R.id.filterButton);
-        filterButton.setOnClickListener(v -> {
-            // Aquí implementarás el diálogo de filtros más adelante
-            Toast.makeText(this, "Mostrar filtros", Toast.LENGTH_SHORT).show();
-        });
+
     }
 }

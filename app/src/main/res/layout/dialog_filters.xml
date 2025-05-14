@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tipo de comida:"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/spinnerFoodType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:entries="@array/food_types"
+        android:prompt="@string/select_food_type"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Rango de precios:"
+        android:textStyle="bold"/>
+
+    <RadioGroup
+        android:id="@+id/radioPriceRange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/radioEconomico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Económico (1)"/>
+
+        <RadioButton
+            android:id="@+id/radioRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Regular (2)"/>
+
+        <RadioButton
+            android:id="@+id/radioCaro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Caro (3)"/>
+    </RadioGroup>
+</LinearLayout>

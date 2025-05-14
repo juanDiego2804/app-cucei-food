@@ -7,6 +7,7 @@ import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cuceifood.GoogleLoginActivity;
 import com.example.cuceifood.MainActivity;
 import com.example.cuceifood.R;
 
