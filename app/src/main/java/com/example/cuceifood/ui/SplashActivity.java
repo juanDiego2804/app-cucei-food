@@ -7,7 +7,7 @@ import android.os.Looper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cuceifood.GoogleLoginActivity;
+import com.example.cuceifood.LoginActivity;
 import com.example.cuceifood.MainActivity;
 import com.example.cuceifood.R;
 
@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
             finish();
         }, 3000); // 3 segundos
     }

@@ -3,20 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:padding="16dp">
 
+    <!-- Icono de perfil -->
     <ImageView
         android:id="@+id/userPhoto"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_notifications_black_24dp"/>
+        android:src="@drawable/ic_account_circle"
+        android:contentDescription="Foto de perfil"
+        android:layout_marginBottom="24dp"/>
 
+    <!-- Nombre de usuario -->
     <TextView
         android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Usuario"
-        android:textSize="18sp"/>
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Correo electrónico -->
+    <TextView
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Botón de cerrar sesión -->
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cerrar sesión"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/white"/>
 </LinearLayout>
