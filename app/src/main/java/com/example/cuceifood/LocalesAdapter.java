@@ -1,13 +1,12 @@
 package com.example.cuceifood;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 import java.util.Map;
 
@@ -67,7 +66,12 @@ public class LocalesAdapter extends RecyclerView.Adapter<LocalesAdapter.LocalVie
             String rangoTexto = rango == 1 ? "Económico" : rango == 2 ? "Regular" : "Caro";
             textRangoPrecios.setText("Precio: " + rangoTexto);
 
-            itemView.setOnClickListener(v -> listener.onItemClick(local));
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), LocalDetailActivity.class);
+                // Usa objectId en lugar de id_local
+                intent.putExtra("localId", local.get("objectId").toString());
+                v.getContext().startActivity(intent);
+            });
         }
     }
 }

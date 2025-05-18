@@ -35,7 +35,8 @@
 
         <activity android:name=".GoogleLoginActivity" android:exported="false"/>
         <activity android:name=".MainActivity" android:exported="true"/>
-
+        <activity android:name=".LocalDetailActivity" android:exported="false" />
     </application>
+
 
 </manifest>
