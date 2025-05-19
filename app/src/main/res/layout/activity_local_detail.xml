@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,63 +16,148 @@
             android:id="@+id/textNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="@color/purple_500"
-            android:layout_marginTop="75dp"/>
+            android:textColor="@android:color/black"
+            android:layout_marginTop="16dp"
+            android:gravity="center"/>
 
-        <!-- Tipo de comida -->
+        <!-- Ubicación con ícono -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_location"
+                android:tint="@color/purple_500"/>
+
+            <TextView
+                android:id="@+id/textUbicacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginLeft="8dp"/>
+        </LinearLayout>
+
+        <!-- Horario -->
         <TextView
-            android:id="@+id/textTipoComida"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="18sp"/>
+            android:text="Horario:"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
-        <!-- Rango de precios -->
-        <TextView
-            android:id="@+id/textRangoPrecios"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"/>
-
-        <!-- Horario -->
         <TextView
             android:id="@+id/textHorario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"/>
+
+        <!-- Rango de precios -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textSize="18sp"/>
+            android:text="Rango de precios:"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
-        <!-- Ubicación -->
         <TextView
-            android:id="@+id/textUbicacion"
+            android:id="@+id/textRangoPrecios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"/>
 
-        <!-- Menú relacionado -->
+        <!-- Tipo de comida -->
         <TextView
-            android:id="@+id/textMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:visibility="gone"/>
+            android:layout_marginTop="16dp"
+            android:text="Tipo de comida:"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
-        <!-- Botón de volver -->
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textTipoComida"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_gravity="center_horizontal"
-            android:text="Volver al inicio"
-            android:backgroundTint="@color/purple_500"
-            android:textColor="@android:color/white"/>
+            android:textSize="18sp"
+            android:layout_marginLeft="16dp"/>
 
+        <!-- Título del menú -->
+        <TextView
+            android:id="@+id/textMenuTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Menú"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:gravity="center"/>
+
+        <!-- Tabla de menú -->
+        <TableLayout
+            android:id="@+id/tableMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:stretchColumns="*"
+            android:shrinkColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/purple_500">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Platillo"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:padding="8dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Precio"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    android:gravity="end"/>
+            </TableRow>
+        </TableLayout>
+
+        <!-- Botones inferiores -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="Volver"
+                android:backgroundTint="@color/purple_500"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
