@@ -65,5 +65,28 @@ dependencies {
 // Opcional para manejar tokens JWT
     implementation("com.auth0.android:jwtdecode:2.0.2")
 
-    
+    implementation("com.google.android.material:material:1.6.0")
+
+
+
+
+// Dependencias básicas de Android
+    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.9.0") // Material Components
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    // Componentes de navegación
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
+
+    // RecyclerView
+    implementation("androidx.recyclerview:recyclerview:1.3.1")
+
+
+
+
+
+
+
 }

@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="@color/white">
 
+    <!-- Mantenemos el estilo nuevo pero con Spinner -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Tipo de comida:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         android:textStyle="bold"/>
 
     <Spinner
@@ -17,13 +21,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:entries="@array/food_types"
-        android:prompt="@string/select_food_type"/>
-
+        android:backgroundTint="@color/accent_red"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:text="Rango de precios:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         android:textStyle="bold"/>
 
     <RadioGroup
@@ -33,22 +38,28 @@
         android:layout_marginTop="8dp"
         android:orientation="vertical">
 
-        <RadioButton
+        <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioEconomico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Económico (1)"/>
+            android:text="Económico (1)"
+            android:textColor="@color/black"
+            app:buttonTint="@color/accent_red"/>
 
-        <RadioButton
+        <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioRegular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Regular (2)"/>
+            android:text="Regular (2)"
+            android:textColor="@color/black"
+            app:buttonTint="@color/accent_red"/>
 
-        <RadioButton
+        <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/radioCaro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Caro (3)"/>
+            android:text="Caro (3)"
+            android:textColor="@color/black"
+            app:buttonTint="@color/accent_red"/>
     </RadioGroup>
 </LinearLayout>

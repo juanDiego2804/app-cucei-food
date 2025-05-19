@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -31,6 +33,8 @@ import com.example.cuceifood.LocalDetailActivity;
 import com.example.cuceifood.LocalesAdapter;
 import com.example.cuceifood.R;
 import com.example.cuceifood.databinding.FragmentHomeBinding;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,17 +87,57 @@ public class HomeFragment extends Fragment {
     private void performSearch() {
         String dishName = searchBar.getText().toString().trim();
 
+        if (!dishName.isEmpty()) {
+            // Paso 1: Buscar los IDs de platillos que coincidan con el nombre
+            String menuWhere = "nombre_platillo LIKE '%" + dishName + "%'";
+            DataQueryBuilder menuQuery = DataQueryBuilder.create();
+            menuQuery.setWhereClause(menuWhere);
+            menuQuery.setPageSize(100);
+
+            Backendless.Data.of("menus").find(menuQuery, new AsyncCallback<List<Map>>() {
+                @Override
+                public void handleResponse(List<Map> matchingMenus) {
+                    List<String> matchingMenuIds = new ArrayList<>();
+                    for (Map menu : matchingMenus) {
+                        matchingMenuIds.add(menu.get("id").toString());
+                    }
+
+                    if (matchingMenuIds.isEmpty()) {
+                        adapter.updateData(new ArrayList<>());
+                        Toast.makeText(getContext(), "No se encontraron platillos", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    // Ahora buscar todos los locales y filtrar por estos IDs en el campo `menu`
+                    fetchAndFilterLocalesByMenuIds(matchingMenuIds);
+                }
+
+                @Override
+                public void handleFault(BackendlessFault fault) {
+                    Toast.makeText(getContext(), "Error buscando menús: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            // Si no hay búsqueda por platillo, construimos el WHERE normal con filtros
+            StringBuilder whereClause = new StringBuilder();
+
+            if (!selectedFoodType.isEmpty() && !selectedFoodType.equals("Todos")) {
+                whereClause.append("tipo_comida = '").append(selectedFoodType).append("'");
+            }
+
+            if (selectedPriceRange != -1) {
+                if (whereClause.length() > 0) whereClause.append(" AND ");
+                whereClause.append("rango_precios = ").append(selectedPriceRange);
+            }
+
+            searchLocales(whereClause.toString());
+        }
+    }
+    private void fetchAndFilterLocalesByMenuIds(List<String> menuIds) {
+        // Aplicamos los filtros si existen
         StringBuilder whereClause = new StringBuilder();
 
-        if (!dishName.isEmpty()) {
-            // Nueva consulta para buscar en menús relacionados
-            whereClause.append("id in (SELECT local_id FROM menus WHERE nombre_platillo LIKE '%")
-                    .append(dishName)
-                    .append("%')");
-        }
-
         if (!selectedFoodType.isEmpty() && !selectedFoodType.equals("Todos")) {
-            if (whereClause.length() > 0) whereClause.append(" AND ");
             whereClause.append("tipo_comida = '").append(selectedFoodType).append("'");
         }
 
@@ -102,9 +146,46 @@ public class HomeFragment extends Fragment {
             whereClause.append("rango_precios = ").append(selectedPriceRange);
         }
 
-        searchLocales(whereClause.toString());
-    }
+        DataQueryBuilder queryBuilder = DataQueryBuilder.create();
+        queryBuilder.setWhereClause(whereClause.length() > 0 ? whereClause.toString() : null);
+        queryBuilder.setPageSize(100);
 
+        Backendless.Data.of("locales").find(queryBuilder, new AsyncCallback<List<Map>>() {
+            @Override
+            public void handleResponse(List<Map> locales) {
+                List<Map<String, Object>> filteredLocales = new ArrayList<>();
+
+                for (Map local : locales) {
+                    try {
+                        String menuJson = (String) local.get("menu");
+                        if (menuJson != null && !menuJson.isEmpty()) {
+                            JSONArray jsonArray = new JSONArray(menuJson);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                String menuId = jsonArray.getString(i);
+                                if (menuIds.contains(menuId)) {
+                                    filteredLocales.add(local);
+                                    break; // Este local ya es válido
+                                }
+                            }
+                        }
+                    } catch (JSONException e) {
+                        Log.e("JSON_ERROR", "Error parsing menu JSON", e);
+                    }
+                }
+
+                if (filteredLocales.isEmpty()) {
+                    Toast.makeText(getContext(), "No se encontraron locales con ese platillo", Toast.LENGTH_SHORT).show();
+                }
+
+                adapter.updateData(filteredLocales);
+            }
+
+            @Override
+            public void handleFault(BackendlessFault fault) {
+                Toast.makeText(getContext(), "Error cargando locales: " + fault.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     private void searchLocales(String whereClause) {
         DataQueryBuilder queryBuilder = DataQueryBuilder.create();
         queryBuilder.setWhereClause(whereClause.isEmpty() ? null : whereClause);
